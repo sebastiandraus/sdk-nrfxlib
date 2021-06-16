@@ -2201,13 +2201,4 @@ void zb_enable_control4_emulator();
 
 zb_ext_neighbor_tbl_ent_t *nwk_choose_parent(zb_address_pan_id_ref_t panid_ref, zb_mac_capability_info_t capability_information);
 
-#if defined ZB_ENABLE_INTER_PAN_NON_DEFAULT_CHANNEL
-/** @brief Function for scheduling calls to zb_nwk_forward
-  *        to send all packets that have been moved to a queue
-  *        because of ongoing INTER-PAN communication.
-  * @param param ignored
-  */
-void zb_nwk_schedule_data_requests_from_queue(zb_uint8_t param);
-#endif /* defined ZB_ENABLE_INTER_PAN_NON_DEFAULT_CHANNEL  */
-
 #endif /* ZB_NWK_H */

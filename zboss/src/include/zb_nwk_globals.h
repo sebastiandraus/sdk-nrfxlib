@@ -356,20 +356,6 @@ typedef struct zb_nwk_handle_s  /* do not pac for IAR */
   zb_uint8_t        ed_list_param;                           /*!< Index of buffer for ED scan results. */
 } zb_nwk_handle_t;
 
-
-#ifdef ZB_ENABLE_INTER_PAN_NON_DEFAULT_CHANNEL
-#define ZB_NWK_INTRP_NON_DEFAULT_CHAN() ZG->nwk.intrp_non_default_chan
-
-/* Declare ring buffer for storing queued NWK packets */
-ZB_RING_BUFFER_DECLARE(zb_nwk_lock_queue, zb_bufid_t, NWK_INTRP_LOCK_QUEUE_SIZE);
-
-typedef struct zb_nwk_intrp_non_default_chan_s
-{
-  zb_bool_t intrp_busy;
-  zb_nwk_lock_queue_t lock_queue;
-} zb_nwk_interp_non_default_chan_t;
-#endif
-
 #ifdef ZB_ROUTER_ROLE
 #define ZB_INVALID_BRRT_IDX 0xFFU
 ZB_ASSERT_COMPILE_DECL(ZB_NWK_BRR_TABLE_SIZE < ZB_INVALID_BRRT_IDX);
@@ -503,9 +489,6 @@ typedef struct zb_nwk_globals_s
     zb_bool_t (*should_accept_frame_before_join)(zb_bufid_t);
   } selector;
 
-#ifdef ZB_ENABLE_INTER_PAN_NON_DEFAULT_CHANNEL
-  zb_nwk_interp_non_default_chan_t intrp_non_default_chan;
-#endif
 } zb_nwk_globals_t;
 
 

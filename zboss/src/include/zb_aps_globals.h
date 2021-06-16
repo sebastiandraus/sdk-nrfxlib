@@ -454,27 +454,6 @@ typedef struct zb_aps_func_selector_s
 #define APS_OUT_FRAG_QUEUE_SIZE 2U
 ZB_RING_BUFFER_DECLARE(zb_aps_out_frag_q, zb_bufid_t, APS_OUT_FRAG_QUEUE_SIZE);
 
-#ifdef ZB_ENABLE_INTER_PAN_NON_DEFAULT_CHANNEL
-#define ZB_APS_INTRP_NON_DEFAULT_CHAN() ZG->aps.intrp_non_default_chan
-
-/* Declare ring buffer for storing queued APS packets */
-ZB_RING_BUFFER_DECLARE(zb_aps_lock_queue, zb_bufid_t, APS_LOCK_QUEUE_SIZE);
-
-typedef struct zb_aps_intrp_non_default_chan_s
-{
-  zb_bool_t intrp_busy;
-  zb_bufid_t packet_buffer;
-  zb_bufid_t worker_buffer;
-  zb_uint8_t next_channel;
-  zb_uint8_t default_page;
-  zb_uint8_t default_channel;
-  zb_channel_page_t channel_page_mask;
-  zb_channel_page_t channel_status_page_mask;
-  zb_uint32_t chan_wait;
-  zb_callback_t cb;
-  zb_aps_lock_queue_t lock_queue;
-} zb_aps_intrp_non_default_chan_t;
-#endif
 
 /**
    APS subsystem globals
@@ -513,10 +492,6 @@ typedef struct zb_aps_globals_s
   zb_time_t                 dups_alarm_start;
 #ifdef ZB_APS_USER_PAYLOAD
   zb_aps_user_payload_callback_t aps_user_payload_cb;
-#endif
-
-#ifdef ZB_ENABLE_INTER_PAN_NON_DEFAULT_CHANNEL
-  zb_aps_intrp_non_default_chan_t intrp_non_default_chan;
 #endif
 } zb_aps_globals_t;
 

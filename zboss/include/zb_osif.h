@@ -867,8 +867,9 @@ void zb_osif_led_off(zb_uint8_t led_no);
 zb_bool_t zb_osif_button_state(zb_uint8_t arg);
 
 /* Inform osif layer that button callback is being set
- * @return ZB_TRUE if leds and buttons have been initiated
- *  with zb_osif_led_button_init()
+ * @return ZB_TRUE if leds and buttons are not initialized yet
+ *  with zb_osif_led_button_init(). In this case stack logic
+ *  should call it explicitly.
  */
 zb_bool_t zb_setup_buttons_cb(zb_callback_t cb);
 

@@ -1130,6 +1130,21 @@ exponent.
 /** @endcond */ /* DOXYGEN_JOINING_LIST_SECTION */
 #endif /* ZB_JOINING_LIST_SUPPORT */
 
+/** @cond DOXYGEN_INTERNAL_DOC */
+/** The necessity of radio interrupt disabling/enabling when MAC gets RX/TX interrupt statuses is platform-dependent.
+ * This protection is not needed only if the platform guarantees that getting a 4-byte aligned variable is an atomic operation.
+ * If platform allows do it without this protection, ZB_GET_RADIO_FLAG_UNPROTECTED macro should be defined for this feature in platform.
+ * Otherwise, radio interrupts disabling/enabling for the case will be switched on.
+ */
+#ifndef ZB_GET_RADIO_FLAG_UNPROTECTED
+#define ZB_GET_RADIO_FLAG_INT_DISABLE() ZB_RADIO_INT_DISABLE()
+#define ZB_GET_RADIO_FLAG_INT_ENABLE() ZB_RADIO_INT_ENABLE()
+#else
+#define ZB_GET_RADIO_FLAG_INT_DISABLE()
+#define ZB_GET_RADIO_FLAG_INT_ENABLE()
+#endif
+/** @endcond */ /* DOXYGEN_INTERNAL_DOC */
+
 /***************************HA and ZLL FEATURES**********************/
 /** @cond DOXYGEN_INTERNAL_DOC */
 #if defined ZB_ENABLE_HA || defined ZB_ENABLE_ZLL
